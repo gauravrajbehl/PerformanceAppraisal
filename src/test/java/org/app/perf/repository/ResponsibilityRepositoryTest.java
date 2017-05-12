@@ -107,9 +107,31 @@ public class ResponsibilityRepositoryTest {
     }
 
 
-    @After
-    public void cleanup() throws SQLException {
+    @Test
+    public void testDeleteByObjectRef() {
 
+        responsibilityRepository.deleteAll();
+
+        Responsibility responsibility = new Responsibility();
+        responsibility.setTitle("Test Responsibility5");
+        responsibility.setDescription("Set Description");
+        responsibilityRepository.save(responsibility);
+
+        Assert.assertNotNull(responsibility);
+        Assert.assertNotNull(responsibility.getId());
+
+        responsibilityRepository.delete(responsibility);
+
+        long count = responsibilityRepository.count();
+        Assert.assertEquals(count,0);
+
+    }
+
+
+
+    @After
+    public void cleanup() {
+        responsibilityRepository.deleteAll();
     }
 
 }
