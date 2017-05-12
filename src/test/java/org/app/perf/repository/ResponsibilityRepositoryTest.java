@@ -1,14 +1,17 @@
 package org.app.perf.repository;
 
 import org.app.perf.domain.Responsibility;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -68,8 +71,26 @@ public class ResponsibilityRepositoryTest {
 
     }
 
+
+    @Test(expected = DataIntegrityViolationException.class)
+    public void testDuplicateTitleNotPersisting() {
+
+        Responsibility responsibilityOne = new Responsibility();
+        responsibilityOne.setTitle("First Responsibility");
+        responsibilityOne.setDescription("Set Description");
+        responsibilityRepository.save(responsibilityOne);
+
+        Responsibility responsibilityTwo = new Responsibility();
+        responsibilityTwo.setTitle("First Responsibility");
+        responsibilityTwo.setDescription("Set Description 2");
+        responsibilityRepository.save(responsibilityTwo);
+    }
+
     @Test
     public void testDeleteById() {
+
+        responsibilityRepository.deleteAll();
+
         Responsibility responsibility = new Responsibility();
         responsibility.setTitle("Test Responsibility4");
         responsibility.setDescription("Set Description");
@@ -85,5 +106,10 @@ public class ResponsibilityRepositoryTest {
 
     }
 
+
+    @After
+    public void cleanup() throws SQLException {
+
+    }
 
 }
