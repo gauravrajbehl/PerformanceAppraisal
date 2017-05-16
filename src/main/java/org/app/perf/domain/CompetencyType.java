@@ -5,7 +5,11 @@ import lombok.Data;
 import javax.persistence.*;
 
 /**
- * Created by gauravbehl on 9/5/17.
+ * An instance of <code>CompetencyType</code> class represents a skill.
+ *
+ * @author      Gaurav
+ * @version     1.0
+ * @since       16-May-2017
  */
 @Data
 @Entity

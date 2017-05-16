@@ -1,7 +1,5 @@
 package org.app.perf.domain;
 
-
-
 import lombok.Data;
 
 import javax.persistence.*;
@@ -43,6 +41,11 @@ public class Responsibility {
     @Column (name = "DESCRIPTION", length = MAX_DESCRIPTION_LENGTH)
     private String description;
 
+    /*
+        Inverse side of bi-directional relationship between <code>Designation</code> and
+        <code>Responsibility</code>. Below mappedBy reference denotes that <code>Responsibility</code>
+        is owned by <code>Designation</code>
+     */
     @ManyToMany(mappedBy = "responsibilities")
     private Set<Designation> designations;
 

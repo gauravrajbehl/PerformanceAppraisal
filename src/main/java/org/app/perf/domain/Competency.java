@@ -6,32 +6,65 @@ import javax.persistence.*;
 import java.util.Set;
 
 /**
- * Created by gauravbehl on 9/5/17.
+ * An instance of <code>Competency</code> class represents a compentency or skill
+ * for a job designation
+ *
+ * @author      Gaurav
+ * @version     1.0
+ * @since       16-May-2017
  */
+
 @Entity
 @Table(name = "COMPETENCY")
 @Data
 public class Competency {
 
+    private static final int MAX_DESCRIPTION_LENGTH = 3000;
+
+    /*
+     Primary Key, Auto-generated using sequence
+    */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private long id;
 
+
+    /*
+      Competency Title
+    */
     @Column(name = "TITLE", unique = true, nullable = false)
     private String title;
 
+
+    /*
+       Competency level i.e. level of compentency
+     */
     @Enumerated(EnumType.STRING)
     @Column(name = "LEVEL")
     private CompentencyLevel compentencyLevel;
 
+
+    /*
+        Competency type i.e. Technical, Managerial etc
+     */
     @ManyToOne(optional = false)
     @JoinColumn(name = "COMPETENCY_TYPE_ID")
     private CompetencyType competencyType;
 
-    @Column(name = "DESCRIPTION", length = 3000)
+
+    /*
+        Descrition for the compentency
+     */
+    @Column(name = "DESCRIPTION", length = MAX_DESCRIPTION_LENGTH)
     private String description;
 
+
+    /*
+        Inverse side of bi-directional relationship between <code>Designation</code> and
+        <code>Competency</code>. Below mappedBy reference denotes that <code>Competency</code>
+        is owned by <code>Designation</code>
+     */
     @ManyToMany(mappedBy = "competencies")
     private Set<Designation> designations;
 }
