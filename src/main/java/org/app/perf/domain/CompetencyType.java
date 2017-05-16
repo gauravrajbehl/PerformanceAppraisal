@@ -1,27 +1,23 @@
 package org.app.perf.domain;
 
+import lombok.Data;
+
+import javax.persistence.*;
+
 /**
  * Created by gauravbehl on 9/5/17.
  */
+@Data
+@Entity
+@Table(name = "COMPETENCY_TYPE")
 public class CompetencyType {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
     private long id;
 
+    @Column(name = "TITLE", unique = true, nullable = false)
     private String title;
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 }

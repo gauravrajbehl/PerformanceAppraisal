@@ -1,7 +1,11 @@
 package org.app.perf.domain;
 
 
+
+import lombok.Data;
+
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * An instance of <code>Responsibility</code> class represents a responsibility
@@ -14,6 +18,7 @@ import javax.persistence.*;
 
 @Entity
 @Table (name = "RESPONSIBILITY")
+@Data
 public class Responsibility {
 
     private static final int MAX_DESCRIPTION_LENGTH = 3000;
@@ -22,6 +27,7 @@ public class Responsibility {
      Primary Key, Auto-generated using sequence
     */
     @Id
+    @Column(name = "ID")
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -37,28 +43,7 @@ public class Responsibility {
     @Column (name = "DESCRIPTION", length = MAX_DESCRIPTION_LENGTH)
     private String description;
 
+    @ManyToMany(mappedBy = "responsibilities")
+    private Set<Designation> designations;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }

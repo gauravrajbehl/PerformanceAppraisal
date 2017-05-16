@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/PerformanceAppraisal
+    username: root
+    password: qazwsx123
+  jpa:
+    hibernate:
+      ddl-auto: update
