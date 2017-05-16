@@ -1,7 +1,11 @@
 package org.app.perf.domain;
 
 /**
- * Created by gauravbehl on 9/5/17.
+ * An <code>enum</code> type representing an employee type
+ *
+ * @author      Gaurav
+ * @version     1.0
+ * @since       16-May-2017
  */
 public enum EmployeeType {
 
