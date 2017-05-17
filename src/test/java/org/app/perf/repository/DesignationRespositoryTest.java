@@ -54,6 +54,12 @@ public class DesignationRespositoryTest {
 
         Designation designation = designationRepository.findOne(1L);
 
+        Responsibility responsibility = responsibilityRepository.findOne(3L);
+
+        designation.getResponsibilities().remove(responsibility);
+
+        designationRepository.save(designation);
+
         System.out.println("a");
     }
 

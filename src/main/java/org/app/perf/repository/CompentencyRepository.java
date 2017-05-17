@@ -7,4 +7,7 @@ import org.springframework.data.repository.CrudRepository;
  * Created by gauravbehl on 17/5/17.
  */
 public interface CompentencyRepository extends CrudRepository<Competency, Long> {
+
+    public Competency findByTitle(String title);
+
 }

@@ -3,6 +3,7 @@ package org.app.perf.repository;
 import org.app.perf.domain.CompentencyLevel;
 import org.app.perf.domain.Competency;
 import org.app.perf.domain.CompetencyType;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,19 +26,26 @@ public class CompetencyRepositoryTest {
     private CompetencyTypeRepository competencyTypeRepository;
 
     @Test
-    public void testSaveCompentency() {
-
-        Competency competency = new Competency();
-        competency.setTitle("Spring Framework");
-        competency.setCompentencyLevel(CompentencyLevel.INTERMEDIATE);
-        competency.setDescription("Description");
-
-        CompetencyType competencyType = competencyTypeRepository.findOne(1L);
-        competency.setCompetencyType(competencyType);
-
-        compentencyRepository.save(competency);
-
+    public void testFindByTitle() {
+        Competency competency = compentencyRepository.findByTitle("Spring Framework");
+        Assert.assertNotNull(competency);
     }
+
+
+//    @Test
+//    public void testSaveCompentency() {
+//
+//        Competency competency = new Competency();
+//        competency.setTitle("Spring Framework");
+//        competency.setCompentencyLevel(CompentencyLevel.INTERMEDIATE);
+//        competency.setDescription("Description");
+//
+//        CompetencyType competencyType = competencyTypeRepository.findOne(1L);
+//        competency.setCompetencyType(competencyType);
+//
+//        compentencyRepository.save(competency);
+//
+//    }
 
 
 }

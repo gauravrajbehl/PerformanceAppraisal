@@ -9,4 +9,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ResponsibilityRepository extends CrudRepository<Responsibility, Long> {
+
+    public Responsibility findByTitle(String title);
+
 }

@@ -8,4 +8,6 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface DesignationRepository extends CrudRepository<Designation, Long> {
 
+    public Designation findByTitle(String title);
+
 }
