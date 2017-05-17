@@ -31,14 +31,14 @@ public class ResponsibilityRepositoryTest {
         Assert.assertEquals(count,0);
     }
 
-//    @Test
-//    public void testSaveResponsitility() {
-//        Responsibility responsibility = new Responsibility();
-//        responsibility.setTitle("Test Responsibility");
-//        responsibility.setDescription("Set Description");
-//        responsibilityRepository.save(responsibility);
-//        Assert.assertNotNull(responsibility.getId());
-//    }
+    @Test
+    public void testSaveResponsitility() {
+        Responsibility responsibility = new Responsibility();
+        responsibility.setTitle("Resource Management Responsibilities");
+        responsibility.setDescription("Coach and counsel a number of Junior Developers");
+        responsibilityRepository.save(responsibility);
+        Assert.assertNotNull(responsibility.getId());
+    }
 //
 //    @Test
 //    public void testFindOne() {

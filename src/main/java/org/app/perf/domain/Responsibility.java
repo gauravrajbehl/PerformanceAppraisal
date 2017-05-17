@@ -3,6 +3,7 @@ package org.app.perf.domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -46,7 +47,29 @@ public class Responsibility {
         <code>Responsibility</code>. Below mappedBy reference denotes that <code>Responsibility</code>
         is owned by <code>Designation</code>
      */
-    @ManyToMany(mappedBy = "responsibilities")
+    //ToDo Remove Eager Fetch
+    @ManyToMany(mappedBy = "responsibilities", fetch = FetchType.EAGER)
     private Set<Designation> designations;
+
+
+    /*
+        Two Responsibilities are considered equal if their title is same.
+     */
+    @Override
+    public boolean equals(Object obj) {
+
+        if (obj == this) return true;
+
+        if (!(obj instanceof Responsibility))
+            return false;
+
+        Responsibility responsibility = (Responsibility) obj;
+        return Objects.equals(responsibility.getTitle(), this.title);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(this.title);
+    }
 
 }

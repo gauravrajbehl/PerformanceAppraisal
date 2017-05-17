@@ -3,6 +3,8 @@ package org.app.perf.domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -36,17 +38,40 @@ public class Designation {
     /*
         Designation can have a list of competencies required for the designation
      */
-    @ManyToMany
+    //ToDo Remove Eager Fetch
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "DESIG_COMP", joinColumns = @JoinColumn(name = "DESIG_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "COMP_ID", referencedColumnName = "ID"))
-    private Set<Competency> competencies;
+    private Set<Competency> competencies = new HashSet<Competency>();
 
     /*
         Designation can have a list of responsibilities required for the designation
      */
-    @ManyToMany
+    //ToDo Remove Eager Fetch
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "DESIG_RESP", joinColumns = @JoinColumn(name = "DESIG_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "RESP_ID", referencedColumnName = "ID"))
-    private Set<Responsibility> responsibilities;
+    private Set<Responsibility> responsibilities = new HashSet<Responsibility>();
+
+
+    /*
+        Two Designations are considered equal if their title is same.
+    */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) return true;
+
+        if ( !(obj instanceof Designation) )
+            return false;
+
+        Designation desig = (Designation) obj;
+
+        return Objects.equals(desig.getTitle(), this.getTitle());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title);
+    }
 
 }

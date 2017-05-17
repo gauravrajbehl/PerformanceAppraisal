@@ -3,6 +3,7 @@ package org.app.perf.domain;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -48,7 +49,7 @@ public class Competency {
     /*
         Competency type i.e. Technical, Managerial etc
      */
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "COMPETENCY_TYPE_ID")
     private CompetencyType competencyType;
 
@@ -65,6 +66,28 @@ public class Competency {
         <code>Competency</code>. Below mappedBy reference denotes that <code>Competency</code>
         is owned by <code>Designation</code>
      */
-    @ManyToMany(mappedBy = "competencies")
+    //ToDo Remove Eager Fetch
+    @ManyToMany(mappedBy = "competencies", fetch = FetchType.EAGER)
     private Set<Designation> designations;
+
+
+    /*
+        Two Competencies are considered equal if their title is same.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) return true;
+
+        if (!(obj instanceof Competency))
+            return false;
+
+        Competency competency = (Competency)obj;
+
+        return Objects.equals(competency.getTitle(), this.getTitle());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.title, this.compentencyLevel);
+    }
 }
