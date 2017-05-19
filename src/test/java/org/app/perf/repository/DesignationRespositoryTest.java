@@ -60,7 +60,6 @@ public class DesignationRespositoryTest {
 
         designationRepository.save(designation);
 
-        System.out.println("a");
     }
 
 
