@@ -13,4 +13,6 @@ public interface ResponsibilityService {
 
     public void saveResponsibility(Responsibility responsibility);
 
+    public void deleteResponsibility(Responsibility responsibility);
+
 }

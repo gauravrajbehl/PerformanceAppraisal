@@ -32,4 +32,9 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
         responsibilityRepository.save(responsibility);
     }
 
+    @Override
+    public void deleteResponsibility(Responsibility responsibility) {
+        responsibilityRepository.delete(responsibility);
+    }
+
 }
