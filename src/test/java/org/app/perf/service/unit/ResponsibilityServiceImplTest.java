@@ -48,7 +48,6 @@ public class ResponsibilityServiceImplTest {
 
     @Test
     public void testNoResponsibilityFoundByTitle() {
-
         String title = "Dummy";
 
         Responsibility responsibility = new Responsibility();
@@ -83,7 +82,6 @@ public class ResponsibilityServiceImplTest {
         List<Responsibility> found = (List<Responsibility>)list;
 
         Assert.assertEquals(found.size(),2);
-
     }
 
     @Test
@@ -98,7 +96,6 @@ public class ResponsibilityServiceImplTest {
         List<Responsibility> found = (List<Responsibility>)list;
 
         Assert.assertEquals(found.size(),0);
-
     }
 
 
@@ -114,11 +111,10 @@ public class ResponsibilityServiceImplTest {
         hibernateResponsibilityService.saveResponsibility(responsibility);
 
         Assert.assertNotNull(responsibility);
-
     }
 
     @Test
-    public void testSaveDuplicateResponsibilityTitleThrowsRunException() {
+    public void testSaveDuplicateResponsibilityTitleThrowsDataIntegrityViolationException() {
 
         Responsibility responsibility1 = new Responsibility();
         responsibility1.setTitle("R1");
@@ -131,7 +127,6 @@ public class ResponsibilityServiceImplTest {
         responsibilityRepositoryMock.save(responsibility1);
 
         doThrow(DataIntegrityViolationException.class).when(responsibilityRepositoryMock).save(responsibility2);
-
     }
 
 }

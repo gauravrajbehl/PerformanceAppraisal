@@ -49,6 +49,7 @@ public class Competency {
     /*
         Competency type i.e. Technical, Managerial etc
      */
+    //ToDo Remove Eager Fetch
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "COMPETENCY_TYPE_ID")
     private CompetencyType competencyType;
