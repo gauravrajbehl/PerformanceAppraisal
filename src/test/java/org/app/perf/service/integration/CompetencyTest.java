@@ -3,9 +3,8 @@ package org.app.perf.service.integration;
 import org.app.perf.AbstractTests;
 import org.app.perf.domain.CompentencyLevel;
 import org.app.perf.domain.Competency;
-import org.app.perf.domain.CompetencyType;
-import org.app.perf.service.CompentencyServiceImpl;
-import org.app.perf.service.CompentencyTypeServiceImpl;
+import org.app.perf.service.CompetencyServiceImpl;
+import org.app.perf.service.CompetencyTypeServiceImpl;
 import org.app.perf.util.StringUtil;
 import org.junit.Assert;
 import org.junit.Test;
@@ -19,10 +18,10 @@ import org.springframework.dao.DataIntegrityViolationException;
 public class CompetencyTest extends AbstractTests {
 
     @Autowired
-    private CompentencyServiceImpl compentencyService;
+    private CompetencyServiceImpl compentencyService;
 
     @Autowired
-    private CompentencyTypeServiceImpl compentencyTypeService;
+    private CompetencyTypeServiceImpl compentencyTypeService;
 
     private static final String COMPTENCY_TYPE_TESTING = "Testing";
 
@@ -30,6 +29,8 @@ public class CompetencyTest extends AbstractTests {
     public void testFindbyTitle() {
         Competency competency = compentencyService.findByTitle("Spring Framework");
         Assert.assertNotNull(competency);
+
+        Assert.assertNotNull((compentencyService.findByTitle("Spring Framework").getId()));
     }
 
     @Test

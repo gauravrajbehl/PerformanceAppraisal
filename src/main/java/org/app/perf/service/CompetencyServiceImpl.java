@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Data
-public class CompentencyServiceImpl implements CompetencyService {
+public class CompetencyServiceImpl implements CompetencyService {
 
     @Autowired
     private CompentencyRepository compentencyRepository;
