@@ -20,4 +20,16 @@ public class CompentencyServiceImpl implements CompetencyService {
     public Competency findByTitle(String title) {
         return compentencyRepository.findByTitle(title);
     }
+
+    @Override
+    public void save(Competency competency) {
+        compentencyRepository.save(competency);
+    }
+
+    @Override
+    public void remove(Competency competency) {
+        compentencyRepository.delete(competency);
+    }
+
+
 }

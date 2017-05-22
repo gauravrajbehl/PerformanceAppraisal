@@ -9,5 +9,8 @@ public interface CompetencyService {
 
     public Competency findByTitle(String title);
 
+    public void save(Competency competency);
+
+    public void remove(Competency competency);
 
 }
