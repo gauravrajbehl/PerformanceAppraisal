@@ -4,9 +4,7 @@ import org.app.perf.AbstractTests;
 import org.app.perf.domain.Competency;
 import org.app.perf.domain.Designation;
 import org.app.perf.domain.Responsibility;
-import org.app.perf.service.CompetencyServiceImpl;
-import org.app.perf.service.DesignationServiceImpl;
-import org.app.perf.service.ResponsibilityServiceImpl;
+import org.app.perf.service.*;
 import org.app.perf.util.StringUtil;
 import org.junit.Assert;
 import org.junit.Test;
@@ -19,13 +17,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class DesignationTest extends AbstractTests {
 
     @Autowired
-    private DesignationServiceImpl designationService;
+    private DesignationService designationService;
 
     @Autowired
-    private ResponsibilityServiceImpl responsibilityService;
+    private ResponsibilityService responsibilityService;
 
     @Autowired
-    private CompetencyServiceImpl competencyService;
+    private CompetencyService competencyService;
 
     @Test
     public void testFetchByTitle() {

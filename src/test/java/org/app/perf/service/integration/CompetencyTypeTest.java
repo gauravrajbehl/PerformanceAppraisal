@@ -2,6 +2,7 @@ package org.app.perf.service.integration;
 
 import org.app.perf.AbstractTests;
 import org.app.perf.domain.CompetencyType;
+import org.app.perf.service.CompetencyTypeService;
 import org.app.perf.service.CompetencyTypeServiceImpl;
 import org.app.perf.util.StringUtil;
 import org.junit.Assert;
@@ -16,7 +17,7 @@ public class CompetencyTypeTest extends AbstractTests {
 
 
     @Autowired
-    private CompetencyTypeServiceImpl competencyTypeServiceImpl;
+    private CompetencyTypeService competencyTypeServiceImpl;
 
     @Test
     public void testGetByTitle() {

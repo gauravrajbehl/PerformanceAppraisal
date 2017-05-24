@@ -2,6 +2,7 @@ package org.app.perf.service.integration;
 
 import org.app.perf.AbstractTests;
 import org.app.perf.domain.Responsibility;
+import org.app.perf.service.ResponsibilityService;
 import org.app.perf.service.ResponsibilityServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;
@@ -17,7 +18,7 @@ import java.util.List;
 public class ResponsibilityTest extends AbstractTests {
 
     @Autowired
-    private ResponsibilityServiceImpl responsibilityService;
+    private ResponsibilityService responsibilityService;
 
     private String titleToDelete = "To Delete";
 

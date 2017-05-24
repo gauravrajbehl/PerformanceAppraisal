@@ -3,6 +3,7 @@ package org.app.perf.service.integration;
 import org.app.perf.AbstractTests;
 import org.app.perf.domain.CompentencyLevel;
 import org.app.perf.domain.Competency;
+import org.app.perf.service.CompetencyService;
 import org.app.perf.service.CompetencyServiceImpl;
 import org.app.perf.service.CompetencyTypeServiceImpl;
 import org.app.perf.util.StringUtil;
@@ -18,7 +19,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 public class CompetencyTest extends AbstractTests {
 
     @Autowired
-    private CompetencyServiceImpl compentencyService;
+    private CompetencyService compentencyService;
 
     @Autowired
     private CompetencyTypeServiceImpl compentencyTypeService;
