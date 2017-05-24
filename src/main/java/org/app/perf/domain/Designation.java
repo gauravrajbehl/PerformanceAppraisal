@@ -38,8 +38,7 @@ public class Designation {
     /*
         Designation can have a list of competencies required for the designation
      */
-    //ToDo Remove Eager Fetch
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(name = "DESIG_COMP", joinColumns = @JoinColumn(name = "DESIG_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "COMP_ID", referencedColumnName = "ID"))
     private Set<Competency> competencies = new HashSet<Competency>();
@@ -47,8 +46,7 @@ public class Designation {
     /*
         Designation can have a list of responsibilities required for the designation
      */
-    //ToDo Remove Eager Fetch
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(name = "DESIG_RESP", joinColumns = @JoinColumn(name = "DESIG_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "RESP_ID", referencedColumnName = "ID"))
     private Set<Responsibility> responsibilities = new HashSet<Responsibility>();
