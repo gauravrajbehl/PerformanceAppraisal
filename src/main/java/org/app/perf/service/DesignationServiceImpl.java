@@ -22,4 +22,16 @@ public class DesignationServiceImpl implements DesignationService {
     public Designation findByTitle(String title) {
         return designationRepository.findByTitle(title);
     }
+
+    @Override
+    public void save(Designation designation) {
+        designationRepository.save(designation);
+    }
+
+    @Override
+    public void delete(Designation designation) {
+        designationRepository.delete(designation);
+    }
+
+
 }

@@ -8,4 +8,8 @@ import org.app.perf.domain.Designation;
 public interface DesignationService {
 
     public Designation findByTitle(String title);
+
+    public void save(Designation designation);
+
+    public void delete(Designation designation);
 }
