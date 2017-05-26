@@ -2,6 +2,7 @@ package org.app.perf.service.integration;
 
 import org.app.perf.AbstractTests;
 import org.app.perf.domain.CompetencyType;
+import org.app.perf.dto.CompetencyTypeDTO;
 import org.app.perf.service.CompetencyTypeService;
 import org.app.perf.service.CompetencyTypeServiceImpl;
 import org.app.perf.util.StringUtil;
@@ -22,7 +23,7 @@ public class CompetencyTypeTest extends AbstractTests {
     @Test
     public void testGetByTitle() {
 
-        CompetencyType competencyType = competencyTypeServiceImpl.findByTitle("Technical");
+        CompetencyTypeDTO competencyType = competencyTypeServiceImpl.findByTitle("Technical");
         Assert.assertNotNull(competencyType);
     }
 

@@ -43,7 +43,7 @@ public class CompetencyTest extends AbstractTests {
         competency.setTitle(title);
         competency.setDescription("Comp Desc");
         competency.setCompentencyLevel(CompentencyLevel.ADVANCED);
-        competency.setCompetencyType(compentencyTypeService.findByTitle(COMPTENCY_TYPE_TESTING));
+        //competency.setCompetencyType(compentencyTypeService.findByTitle(COMPTENCY_TYPE_TESTING));
 
         compentencyService.save(competency);
 
@@ -95,7 +95,7 @@ public class CompetencyTest extends AbstractTests {
         competency.setTitle(title);
         competency.setDescription("Comp Desc");
         competency.setCompentencyLevel(CompentencyLevel.ADVANCED);
-        competency.setCompetencyType(compentencyTypeService.findByTitle(COMPTENCY_TYPE_TESTING));
+        //competency.setCompetencyType(compentencyTypeService.findByTitle(COMPTENCY_TYPE_TESTING));
 
         compentencyService.save(competency);
 

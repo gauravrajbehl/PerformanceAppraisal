@@ -3,6 +3,7 @@ package org.app.perf.controller.unit;
 import org.app.perf.AbstractWebTests;
 import org.app.perf.controller.CompetencyTypeController;
 import org.app.perf.domain.CompetencyType;
+import org.app.perf.exception.DataNotFoundException;
 import org.app.perf.service.CompetencyTypeService;
 import org.hamcrest.Matchers;
 import org.junit.Test;
@@ -60,6 +61,22 @@ public class CompetencyTypeControllerTest extends AbstractWebTests {
 
 
     @Test
+    public void testGetComptencyTypeByIdNotFound() throws Exception {
+
+        CompetencyType competencyType = new CompetencyType();
+        competencyType.setId(1000L);
+        competencyType.setTitle("MVC");
+
+        when(competencyTypeServiceMock.findById(1000L)).thenThrow(DataNotFoundException.class);
+
+        mockMvc.perform(get("/competencyType/1000")).andExpect(status().isNoContent());
+
+        verify(competencyTypeServiceMock, times(1)).findById(1000L);
+        verifyNoMoreInteractions(competencyTypeServiceMock);
+    }
+
+
+    @Test
     public void testGetAllShouldReturnAllCompetencies() throws Exception {
 
         CompetencyType c1 = new CompetencyType();
@@ -74,7 +91,6 @@ public class CompetencyTypeControllerTest extends AbstractWebTests {
         list.add(c1);
         list.add(c2);
 
-
         when(competencyTypeServiceMock.findAll()).thenReturn(list);
 
         mockMvc.perform(get("/competencyType")).andExpect(status().isOk()).
@@ -84,10 +100,8 @@ public class CompetencyTypeControllerTest extends AbstractWebTests {
                 andExpect(jsonPath("$[0].id", is(1))).andExpect(jsonPath("$[0].title", is("MVC"))).
                 andExpect(jsonPath("$[1].id", is(2))).andExpect(jsonPath("$[1].title", is("Spring")));
 
-
         verify(competencyTypeServiceMock, times(1)).findAll();
         verifyNoMoreInteractions(competencyTypeServiceMock);
-
     }
 
 

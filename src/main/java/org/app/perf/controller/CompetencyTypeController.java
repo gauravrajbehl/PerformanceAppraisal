@@ -2,8 +2,11 @@ package org.app.perf.controller;
 
 import lombok.Data;
 import org.app.perf.domain.CompetencyType;
+import org.app.perf.exception.DataNotFoundException;
 import org.app.perf.service.CompetencyTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,17 +25,27 @@ public class CompetencyTypeController {
     @Autowired
     private CompetencyTypeService competencyTypeService;
 
+    /**
+     *
+     * @param id
+     * @return
+     * @throws DataNotFoundException
+     */
     @RequestMapping(value = "/competencyType/{id}", method = RequestMethod.GET)
-    @ResponseBody
-    public CompetencyType getCompetencyTypeById(@PathVariable("id") Long id) {
-        return competencyTypeService.findById(id);
+    public ResponseEntity<CompetencyType> getCompetencyTypeById(@PathVariable("id") Long id) throws DataNotFoundException {
+
+        CompetencyType competencyType = competencyTypeService.findById(id);
+        return new ResponseEntity<CompetencyType>(competencyType, HttpStatus.OK);
     }
 
 
+    /**
+     *
+     * @return
+     */
     @RequestMapping(value = "/competencyType", method = RequestMethod.GET)
-    @ResponseBody
-    public List<CompetencyType> getAllCompetencyTypes() {
-        return competencyTypeService.findAll();
+    public ResponseEntity<List<CompetencyType>> getAllCompetencyTypes() {
+        return new ResponseEntity<List<CompetencyType>>(competencyTypeService.findAll(),HttpStatus.OK );
     }
 
 }
