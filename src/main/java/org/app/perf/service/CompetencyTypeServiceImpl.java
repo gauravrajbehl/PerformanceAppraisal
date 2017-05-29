@@ -9,6 +9,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -25,14 +28,19 @@ public class CompetencyTypeServiceImpl implements CompetencyTypeService {
     private CompetencyTypeRepository competencyTypeRepository;
 
     @Override
-    public CompetencyTypeDTO findByTitle(String title) {
+    public CompetencyTypeDTO findByTitle(String title) throws DataNotFoundException{
         CompetencyType competencyType = competencyTypeRepository.findByTitle(title);
+
+        if (competencyType == null) {
+            throw new DataNotFoundException("CompetencyType not found. title: " + title);
+        }
+
         CompetencyTypeDTO dto = mapper.map(competencyType, CompetencyTypeDTO.class);
         return dto;
     }
 
     @Override
-    public CompetencyType findById(Long id) throws DataNotFoundException {
+    public CompetencyTypeDTO findById(Long id) throws DataNotFoundException {
 
         CompetencyType competencyType = competencyTypeRepository.findOne(id);
 
@@ -40,21 +48,34 @@ public class CompetencyTypeServiceImpl implements CompetencyTypeService {
             throw new DataNotFoundException("CompetencyType not found. Id: " + id);
         }
 
-
-        return competencyType;
+        return mapper.map(competencyType,CompetencyTypeDTO.class);
     }
 
     @Override
-    public List<CompetencyType> findAll() {
-        return (List<CompetencyType>) competencyTypeRepository.findAll();
+    public List<CompetencyTypeDTO> findAll() throws DataNotFoundException{
+
+        List<CompetencyType> competencyTypeList = (List)competencyTypeRepository.findAll();
+
+        if (competencyTypeList.size() == 0) {
+            throw new DataNotFoundException("Competency Types not found");
+        }
+
+        List<CompetencyTypeDTO> competencyTypeDTOList = new ArrayList<CompetencyTypeDTO>();
+        Iterator<CompetencyType> competencyTypeIterator = competencyTypeRepository.findAll().iterator();
+
+        while (competencyTypeIterator.hasNext()) {
+            competencyTypeDTOList.add(mapper.map(competencyTypeIterator.next(), CompetencyTypeDTO.class));
+        }
+
+        return competencyTypeDTOList;
     }
 
     @Override
-    public void save(CompetencyType competencyType) {
-        competencyTypeRepository.save(competencyType);
+    @Transactional
+    public void save(CompetencyTypeDTO competencyTypeDTO) {
+
+        CompetencyType c = mapper.map(competencyTypeDTO, CompetencyType.class);
+        competencyTypeRepository.save(c);
     }
-
-
-
 
 }

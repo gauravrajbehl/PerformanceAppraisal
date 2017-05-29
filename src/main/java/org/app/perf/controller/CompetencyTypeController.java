@@ -33,9 +33,9 @@ public class CompetencyTypeController {
      */
     @RequestMapping(value = "/competencyType/{id}", method = RequestMethod.GET)
     public ResponseEntity<CompetencyType> getCompetencyTypeById(@PathVariable("id") Long id) throws DataNotFoundException {
-
-        CompetencyType competencyType = competencyTypeService.findById(id);
-        return new ResponseEntity<CompetencyType>(competencyType, HttpStatus.OK);
+return null;
+        //CompetencyType competencyType = competencyTypeService.findById(id);
+        //return new ResponseEntity<CompetencyType>(competencyType, HttpStatus.OK);
     }
 
 
@@ -45,7 +45,8 @@ public class CompetencyTypeController {
      */
     @RequestMapping(value = "/competencyType", method = RequestMethod.GET)
     public ResponseEntity<List<CompetencyType>> getAllCompetencyTypes() {
-        return new ResponseEntity<List<CompetencyType>>(competencyTypeService.findAll(),HttpStatus.OK );
+        //return new ResponseEntity<List<CompetencyType>>(competencyTypeService.findAll(),HttpStatus.OK );
+        return null;
     }
 
 }

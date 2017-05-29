@@ -46,7 +46,7 @@ public class CompetencyTypeControllerTest extends AbstractWebTests {
         competencyType.setId(2L);
         competencyType.setTitle("MVC");
 
-        when(competencyTypeServiceMock.findById(2L)).thenReturn(competencyType);
+        //when(competencyTypeServiceMock.findById(2L)).thenReturn(competencyType);
 
         mockMvc.perform(get("/competencyType/2")).andExpect(status().isOk()).
                 andExpect(content().contentType(new MediaType(MediaType.APPLICATION_JSON.getType(),
@@ -91,7 +91,7 @@ public class CompetencyTypeControllerTest extends AbstractWebTests {
         list.add(c1);
         list.add(c2);
 
-        when(competencyTypeServiceMock.findAll()).thenReturn(list);
+        //when(competencyTypeServiceMock.findAll()).thenReturn(list);
 
         mockMvc.perform(get("/competencyType")).andExpect(status().isOk()).
                 andExpect(content().contentType(new MediaType(MediaType.APPLICATION_JSON.getType(),

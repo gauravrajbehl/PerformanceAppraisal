@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DesignationRepository extends CrudRepository<Designation, Long> {
 
-    //@Query("SELECT d FROM Designation d LEFT JOIN FETCH d.competencies LEFT JOIN FETCH d.responsibilities  where d.title =  ?1")
+    @Query("SELECT d FROM Designation d LEFT JOIN FETCH d.competencies LEFT JOIN FETCH d.responsibilities  where d.title =  ?1")
     public Designation findByTitle(String title);
 
 }

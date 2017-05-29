@@ -49,8 +49,8 @@ public class Competency {
     /*
         Competency type i.e. Technical, Managerial etc
      */
-//    @ManyToOne(optional = false)
-//    @JoinColumn(name = "COMPETENCY_TYPE_ID")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "COMPETENCY_TYPE_ID")
     private CompetencyType competencyType;
 
 

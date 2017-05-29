@@ -11,12 +11,12 @@ import java.util.List;
  */
 public interface CompetencyTypeService {
 
-    public CompetencyTypeDTO findByTitle(String title);
+    public CompetencyTypeDTO findByTitle(String title) throws DataNotFoundException;
 
-    public CompetencyType findById(Long id) throws DataNotFoundException;
+    public CompetencyTypeDTO findById(Long id) throws DataNotFoundException;
 
-    public List<CompetencyType> findAll();
+    public List<CompetencyTypeDTO> findAll() throws DataNotFoundException;
 
-    public void save(CompetencyType competencyType);
+    public void save(CompetencyTypeDTO competencyTypeDTO);
 
 }
