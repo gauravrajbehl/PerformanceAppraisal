@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * Created by gauravbehl on 24/5/17.
+ * Restful Controller class for <code>CompetencyType</code>
+ * @author gauravbehl
+ * @version 1.0
+ * @since   21-June-17
  */
 @Controller
 @Data
