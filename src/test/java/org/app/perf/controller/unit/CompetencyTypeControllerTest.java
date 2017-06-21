@@ -74,33 +74,6 @@ public class CompetencyTypeControllerTest extends AbstractWebTests {
 
 
     @Test
-    public void testGetCompetencyTypeBydTitleShouldReturnOneCompetency() throws Exception{
-
-        CompetencyTypeDTO competencyTypeDTO = createCompetencyTypeDTOWithId("MVC", 2L);
-
-        when(competencyTypeServiceMock.findByTitle("MVC")).thenReturn(competencyTypeDTO);
-
-        mockMvc.perform(get("/competencyType/title/MVC")).andExpect(status().isOk()).andExpect(content().contentType(APPLICATION_JSON)).
-                andExpect(jsonPath("$.id", is(2))).andExpect(jsonPath("$.title", is("MVC")));
-
-
-        verify(competencyTypeServiceMock, times(1)).findByTitle("MVC");
-        verifyNoMoreInteractions(competencyTypeServiceMock);
-
-    }
-
-    @Test
-    public void testGetCompetencyTypeBydTitleShouldNotReturnAnyCompetency() throws Exception{
-
-        when(competencyTypeServiceMock.findByTitle("JUNK")).thenThrow(DataNotFoundException.class);
-
-        mockMvc.perform(get("/competencyType/title/JUNK")).andExpect(status().isNoContent());
-
-        verify(competencyTypeServiceMock, times(1)).findByTitle("JUNK");
-        verifyNoMoreInteractions(competencyTypeServiceMock);
-    }
-
-    @Test
     public void testGetAllShouldReturnAllCompetencies() throws Exception {
 
         CompetencyTypeDTO c1 = createCompetencyTypeDTOWithId("MVC", 1L);
@@ -131,7 +104,7 @@ public class CompetencyTypeControllerTest extends AbstractWebTests {
         when(competencyTypeServiceMock.exists(competencyTypeDTO)).thenReturn(false);
         doNothing().when(competencyTypeServiceMock).save(competencyTypeDTO);
 
-        mockMvc.perform(post("/competencyType/create").contentType(APPLICATION_JSON).
+        mockMvc.perform(post("/competencyType").contentType(APPLICATION_JSON).
                 content(new ObjectMapper().writeValueAsString(competencyTypeDTO))).
                 andExpect(status().isCreated());
 
@@ -147,7 +120,7 @@ public class CompetencyTypeControllerTest extends AbstractWebTests {
 
         when(competencyTypeServiceMock.exists(competencyTypeDTO)).thenReturn(true);
 
-        mockMvc.perform(post("/competencyType/create").contentType(APPLICATION_JSON).
+        mockMvc.perform(post("/competencyType").contentType(APPLICATION_JSON).
                 content(new ObjectMapper().writeValueAsString(competencyTypeDTO))).
                 andExpect(status().isConflict());
 
@@ -164,7 +137,7 @@ public class CompetencyTypeControllerTest extends AbstractWebTests {
         when(competencyTypeServiceMock.findById(competencyTypeDTO.getId())).thenReturn(competencyTypeDTO);
         doNothing().when(competencyTypeServiceMock).save(competencyTypeDTO);
 
-        mockMvc.perform(put("/competencyType/update/1").contentType(APPLICATION_JSON).
+        mockMvc.perform(put("/competencyType/1").contentType(APPLICATION_JSON).
                 content(new ObjectMapper().writeValueAsString(competencyTypeDTO))).
                 andExpect(status().isOk());
 

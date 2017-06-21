@@ -24,10 +24,11 @@ public class CompetencyTypeController {
     private CompetencyTypeService competencyTypeService;
 
     /**
+     * Rest method used for getting <code>CompetencyTypeDTO</code> by id
      *
-     * @param id
-     * @return
-     * @throws DataNotFoundException
+     * @param id id of the <code>CompetencyTypeDTO</code>
+     * @return returns <code>ResponseEntity</code> consisting found <code>CompetencyTypeDTO</code> record
+     * @throws DataNotFoundException if <code>CompetencyTypeDTO</code> is not found
      */
     @RequestMapping(value = "/competencyType/{id}", method = RequestMethod.GET)
     public ResponseEntity<CompetencyTypeDTO> getCompetencyTypeById(@PathVariable("id") Long id) throws DataNotFoundException {
@@ -36,32 +37,23 @@ public class CompetencyTypeController {
         return new ResponseEntity<CompetencyTypeDTO>(competencyType, HttpStatus.OK);
     }
 
-
     /**
+     * Rest method used for getting all of existing <code>CompetencyTypeDTO</code> data
      *
-     * @return
+     * @return returns <code>ResponseEntity</code> consisting found <code>CompetencyTypeDTO</code> records
      */
     @RequestMapping(value = "/competencyTypes", method = RequestMethod.GET)
     public ResponseEntity<List<CompetencyTypeDTO>> getAllCompetencyTypes() throws DataNotFoundException {
         return new ResponseEntity<List<CompetencyTypeDTO>>(competencyTypeService.findAll(),HttpStatus.OK );
     }
 
+
     /**
-     *
-     * @param title
-     * @return
-     * @throws DataNotFoundException
+     * Rest method to create new <code>CompetencyTypeDTO</code> record
+     * @param competencyTypeDTO <code>RequestBody</code> consisting Json representation for new <code>CompetencyTypeDTO</code> record
+     * @return returns <code>ResponseEntity</code> consisting saved <code>CompetencyTypeDTO</code> object
      */
-    @RequestMapping(value = "/competencyType/title/{title}", method = RequestMethod.GET)
-    public ResponseEntity<CompetencyTypeDTO> getCompetencyByTitle(@PathVariable("title") String title) throws DataNotFoundException {
-
-        CompetencyTypeDTO competencyTypeDTO = competencyTypeService.findByTitle(title);
-        return new ResponseEntity<CompetencyTypeDTO>(competencyTypeDTO,HttpStatus.OK);
-
-    }
-
-
-    @RequestMapping(value = "/competencyType/create", method = RequestMethod.POST)
+    @RequestMapping(value = "/competencyType", method = RequestMethod.POST)
     public ResponseEntity<CompetencyTypeDTO> create(@RequestBody CompetencyTypeDTO competencyTypeDTO) {
 
         if(competencyTypeService.exists(competencyTypeDTO) == true) {
@@ -72,7 +64,15 @@ public class CompetencyTypeController {
         return new ResponseEntity<CompetencyTypeDTO>(competencyTypeDTO, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/competencyType/update/{id}", method = RequestMethod.PUT)
+    /**
+     * Rest method to update and existing <code>CompetencyTypeDTO</code> record
+     *
+     * @param id id of Competency Type Object
+     * @param competencyTypeDTO
+     * @return <code>RequestBody</code> consisting Json representation for an existing <code>CompetencyTypeDTO</code> record
+     * @throws DataNotFoundException returns <code>ResponseEntity</code> consisting saved <code>CompetencyTypeDTO</code> object
+     */
+    @RequestMapping(value = "/competencyType/{id}", method = RequestMethod.PUT)
     public ResponseEntity<CompetencyTypeDTO> update(@PathVariable Long id,
                                                     @RequestBody CompetencyTypeDTO competencyTypeDTO) throws DataNotFoundException {
 
