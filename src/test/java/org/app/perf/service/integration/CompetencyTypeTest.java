@@ -68,18 +68,14 @@ public class CompetencyTypeTest extends AbstractTests {
         competencyTypeService.save(competencyTypeDTO);
 
         Assert.assertEquals(newTitle, competencyTypeDTO.getTitle());
-
-        CompetencyTypeDTO findOldCompetencyType = competencyTypeService.findByTitle(oldTitle);
     }
 
 
     @Test
     public void testFindAll() throws DataNotFoundException{
-
         List<CompetencyTypeDTO> list = competencyTypeService.findAll();
         Assert.assertTrue(list.size() > 0);
         Assert.assertTrue(list.get(0) instanceof CompetencyTypeDTO);
-
     }
 
     @Test(expected = DataNotFoundException.class)
@@ -94,13 +90,18 @@ public class CompetencyTypeTest extends AbstractTests {
     }
 
 
-    private CompetencyTypeDTO createCompetencyTypeDTO() {
-
-        CompetencyTypeDTO competencyTypeDTO = new CompetencyTypeDTO();
-        competencyTypeDTO.setTitle(StringUtil.getRandomString());
-
-        return competencyTypeDTO;
+    @Test
+    public void testUserExists() {
+        CompetencyTypeDTO competencyTypeDTO = createCompetencyTypeDTO();
+        boolean exists = competencyTypeService.exists(competencyTypeDTO);
+        Assert.assertFalse(exists);
     }
 
+
+    private CompetencyTypeDTO createCompetencyTypeDTO() {
+        CompetencyTypeDTO competencyTypeDTO = new CompetencyTypeDTO();
+        competencyTypeDTO.setTitle(StringUtil.getRandomString());
+        return competencyTypeDTO;
+    }
 
 }

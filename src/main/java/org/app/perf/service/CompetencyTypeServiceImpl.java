@@ -71,11 +71,20 @@ public class CompetencyTypeServiceImpl implements CompetencyTypeService {
     }
 
     @Override
-    @Transactional
     public void save(CompetencyTypeDTO competencyTypeDTO) {
 
         CompetencyType c = mapper.map(competencyTypeDTO, CompetencyType.class);
         competencyTypeRepository.save(c);
+    }
+
+    @Override
+    public boolean exists(CompetencyTypeDTO competencyTypeDTO) {
+
+        if (competencyTypeRepository.findByTitle(competencyTypeDTO.getTitle()) == null) {
+            return false;
+        }
+
+        return true;
     }
 
 }

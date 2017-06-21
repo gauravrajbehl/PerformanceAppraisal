@@ -19,4 +19,5 @@ public interface CompetencyTypeService {
 
     public void save(CompetencyTypeDTO competencyTypeDTO);
 
+    boolean exists(CompetencyTypeDTO competencyTypeDTO);
 }
