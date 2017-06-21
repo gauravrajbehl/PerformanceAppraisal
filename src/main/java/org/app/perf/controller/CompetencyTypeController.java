@@ -15,6 +15,7 @@ import java.util.List;
 
 /**
  * Restful Controller class for <code>CompetencyType</code>
+ *
  * @author gauravbehl
  * @version 1.0
  * @since   21-June-17
@@ -31,7 +32,7 @@ public class CompetencyTypeController {
      *
      * @param id id of the <code>CompetencyTypeDTO</code>
      * @return returns <code>ResponseEntity</code> consisting found <code>CompetencyTypeDTO</code> record
-     * @throws DataNotFoundException if <code>CompetencyTypeDTO</code> is not found
+     * @throws DataNotFoundException is thrown if <code>CompetencyTypeDTO</code> is not found
      */
     @RequestMapping(value = "/competencyType/{id}", method = RequestMethod.GET)
     public ResponseEntity<CompetencyTypeDTO> getCompetencyTypeById(@PathVariable("id") Long id) throws DataNotFoundException {
@@ -47,7 +48,7 @@ public class CompetencyTypeController {
      */
     @RequestMapping(value = "/competencyTypes", method = RequestMethod.GET)
     public ResponseEntity<List<CompetencyTypeDTO>> getAllCompetencyTypes() throws DataNotFoundException {
-        return new ResponseEntity<List<CompetencyTypeDTO>>(competencyTypeService.findAll(),HttpStatus.OK );
+        return new ResponseEntity<List<CompetencyTypeDTO>>(competencyTypeService.findAll(),HttpStatus.OK);
     }
 
 
@@ -73,7 +74,7 @@ public class CompetencyTypeController {
      * @param id id of Competency Type Object
      * @param competencyTypeDTO
      * @return <code>RequestBody</code> consisting Json representation for an existing <code>CompetencyTypeDTO</code> record
-     * @throws DataNotFoundException returns <code>ResponseEntity</code> consisting saved <code>CompetencyTypeDTO</code> object
+     * @throws DataNotFoundException is thrown when <code>CompetencyTypeDTO</code> is not found
      */
     @RequestMapping(value = "/competencyType/{id}", method = RequestMethod.PUT)
     public ResponseEntity<CompetencyTypeDTO> update(@PathVariable Long id,
@@ -84,6 +85,5 @@ public class CompetencyTypeController {
         competencyTypeService.save(competencyTypeDTO);
         return new ResponseEntity<CompetencyTypeDTO>(competencyTypeDTO, HttpStatus.OK);
     }
-
 
 }

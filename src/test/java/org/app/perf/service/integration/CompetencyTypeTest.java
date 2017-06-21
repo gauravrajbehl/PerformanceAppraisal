@@ -56,7 +56,7 @@ public class CompetencyTypeTest extends AbstractTests {
     }
 
 
-    @Test(expected = DataNotFoundException.class)
+    @Test
     public void testUpdateCompetencyType() throws DataNotFoundException {
 
         CompetencyTypeDTO competencyTypeDTO = competencyTypeService.findById(1L);
