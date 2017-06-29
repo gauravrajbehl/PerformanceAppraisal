@@ -75,16 +75,19 @@ public class CompetencyTypeServiceImpl implements CompetencyTypeService {
 
         CompetencyType c = mapper.map(competencyTypeDTO, CompetencyType.class);
         competencyTypeRepository.save(c);
+
+        //Set id back in DTO
+        competencyTypeDTO.setId(c.getId());
     }
 
     @Override
     public boolean exists(CompetencyTypeDTO competencyTypeDTO) {
 
-        if (competencyTypeRepository.findByTitle(competencyTypeDTO.getTitle()) == null) {
-            return false;
+            if (competencyTypeRepository.findByTitle(competencyTypeDTO.getTitle()) != null) {
+            return true;
         }
 
-        return true;
+        return false;
     }
 
 }

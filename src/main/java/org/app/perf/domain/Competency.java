@@ -23,7 +23,7 @@ public class Competency {
     private static final int MAX_DESCRIPTION_LENGTH = 3000;
 
     /*
-     Primary Key, Auto-generated using sequence
+     Primary Key, Auto-generated
     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,6 +1,7 @@
 package org.app.perf;
 
 import org.junit.runner.RunWith;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**

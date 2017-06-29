@@ -21,7 +21,7 @@ import java.util.Set;
 public class Designation {
 
     /*
-     Primary Key, Auto-generated using sequence
+     Primary Key, Auto-generated
     */
     @Id
     @Column(name = "ID")
