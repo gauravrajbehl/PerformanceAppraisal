@@ -29,11 +29,15 @@ public class CompetencyServiceImpl implements CompetencyService {
     public void save(CompetencyDTO competencyDTO) {
         Competency competency = modelMapper.map(competencyDTO, Competency.class);
         compentencyRepository.save(competency);
+        competencyDTO.setId(competency.getId());
     }
 
     @Override
-    public void remove(Competency competency) {
+    public void remove(CompetencyDTO competencyDTO) {
+
+        Competency competency = modelMapper.map(competencyDTO,Competency.class);
         compentencyRepository.delete(competency);
+        System.out.print(competency);
     }
 
     @Override
@@ -45,6 +49,7 @@ public class CompetencyServiceImpl implements CompetencyService {
             throw new DataNotFoundException("Competency Not found: " + id);
         }
 
+        //modelMapper.map()
         return modelMapper.map(competency, CompetencyDTO.class);
     }
 

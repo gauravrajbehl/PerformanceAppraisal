@@ -13,7 +13,7 @@ public interface CompetencyService {
 
     public void save(CompetencyDTO competencyDTO);
 
-    public void remove(Competency competency);
+    public void remove(CompetencyDTO competency);
 
     public CompetencyDTO findById(Long id) throws DataNotFoundException;
 

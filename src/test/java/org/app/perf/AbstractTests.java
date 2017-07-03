@@ -9,7 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  * Created by gauravbehl on 19/5/17.
  */
 
-@ActiveProfiles("dev")
+@ActiveProfiles("test")
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class AbstractTests {

@@ -21,6 +21,8 @@ public class CompetencyTypeTest extends AbstractTests {
     @Autowired
     private CompetencyTypeService competencyTypeService;
 
+
+
     @Test
     public void testSaveCompetencyType() {
 
@@ -49,10 +51,10 @@ public class CompetencyTypeTest extends AbstractTests {
         competencyTypeService.save(competencyTypeDTO);
 
 
-        CompetencyTypeDTO competencyType2 = new CompetencyTypeDTO();
-        competencyType2.setTitle(competencyTypeDTO.getTitle());
-
-        competencyTypeService.save(competencyType2);
+//        CompetencyTypeDTO competencyType2 = new CompetencyTypeDTO();
+//        competencyType2.setTitle(competencyTypeDTO.getTitle());
+//
+//        competencyTypeService.save(competencyType2);
     }
 
 
@@ -99,9 +101,10 @@ public class CompetencyTypeTest extends AbstractTests {
 
 
     private CompetencyTypeDTO createCompetencyTypeDTO() {
-        CompetencyTypeDTO competencyTypeDTO = new CompetencyTypeDTO();
-        competencyTypeDTO.setTitle(StringUtil.getRandomString());
-        return competencyTypeDTO;
+//        CompetencyTypeDTO competencyTypeDTO = new CompetencyTypeDTO();
+//        competencyTypeDTO.setTitle(StringUtil.getRandomString());
+//        return competencyTypeDTO;
+        return null;
     }
 
 }

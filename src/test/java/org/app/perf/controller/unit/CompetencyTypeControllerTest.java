@@ -149,16 +149,18 @@ public class CompetencyTypeControllerTest extends AbstractWebTests {
     }
 
     private CompetencyTypeDTO createCompetencyTypeDTOWithId(String title, Long id) {
-        CompetencyTypeDTO competencyTypeDTO = new CompetencyTypeDTO();
-        competencyTypeDTO.setTitle(title);
-        competencyTypeDTO.setId(id);
-        return competencyTypeDTO;
+//        CompetencyTypeDTO competencyTypeDTO = new CompetencyTypeDTO();
+//        competencyTypeDTO.setTitle(title);
+//        competencyTypeDTO.setId(id);
+//        return competencyTypeDTO;
+        return null;
     }
 
     private CompetencyTypeDTO createCompetencyType(String title) {
-        CompetencyTypeDTO competencyTypeDTO = new CompetencyTypeDTO();
-        competencyTypeDTO.setTitle(title);
-        return competencyTypeDTO;
+//        CompetencyTypeDTO competencyTypeDTO = new CompetencyTypeDTO();
+//        competencyTypeDTO.setTitle(title);
+//        return competencyTypeDTO;
+        return null;
     }
 
 }
