@@ -17,6 +17,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
+import java.util.List;
+
 /**
  * Created by gauravbehl on 19/5/17.
  */
@@ -116,6 +118,31 @@ public class CompetencyTest extends AbstractTests {
         //Throw Exception
         CompetencyDTO d = compentencyService.findById(competencyDTO.getId());
     }
+
+    //Test find all competencies
+    @Test
+    public void test_find_all_competencies_should_return_all_competencies() throws DataNotFoundException {
+        CompetencyDTO c1 = TestDataGenerator.createNewCompetencyDTO("C1");
+        c1.setCompetencyType(createNewCompetencyTypeDTO("CT1"));
+
+        CompetencyDTO c2 = TestDataGenerator.createNewCompetencyDTO("C2");
+        c2.setCompetencyType(createNewCompetencyTypeDTO("CT2"));
+
+        compentencyService.save(c1);
+        compentencyService.save(c2);
+
+        List<CompetencyDTO> competencyDTOList = compentencyService.findAll();
+
+        Assert.assertEquals(competencyDTOList.size(), 2);
+    }
+
+
+    //Test find all competencies - no data
+    @Test (expected = DataNotFoundException.class)
+    public void test_find_all_competencies_should_return_throw_exception() throws DataNotFoundException {
+        List<CompetencyDTO> competencyDTOList = compentencyService.findAll();
+    }
+
 
 
     private CompetencyTypeDTO createNewCompetencyTypeDTO() {

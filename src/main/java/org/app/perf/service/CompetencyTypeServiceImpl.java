@@ -61,7 +61,7 @@ public class CompetencyTypeServiceImpl implements CompetencyTypeService {
         }
 
         List<CompetencyTypeDTO> competencyTypeDTOList = new ArrayList<CompetencyTypeDTO>();
-        Iterator<CompetencyType> competencyTypeIterator = competencyTypeRepository.findAll().iterator();
+        Iterator<CompetencyType> competencyTypeIterator = competencyTypeList.iterator();
 
         while (competencyTypeIterator.hasNext()) {
             competencyTypeDTOList.add(mapper.map(competencyTypeIterator.next(), CompetencyTypeDTO.class));

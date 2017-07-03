@@ -9,6 +9,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -54,13 +56,21 @@ public class CompetencyServiceImpl implements CompetencyService {
     }
 
     @Override
-    public List<CompetencyDTO> findAll() {
+    public List<CompetencyDTO> findAll() throws DataNotFoundException {
 
         List<Competency> list = (List)compentencyRepository.findAll();
+        if (list.size() == 0) {
+            throw new DataNotFoundException("Competencies not found");
+        }
 
+        List<CompetencyDTO> competencyDTOList = new ArrayList<CompetencyDTO>();
 
+        Iterator<Competency> iterator = list.iterator();
+        while(iterator.hasNext()) {
+            competencyDTOList.add(modelMapper.map(iterator.next(),CompetencyDTO.class));
+        }
 
-        return null;
+        return competencyDTOList;
     }
 
 
