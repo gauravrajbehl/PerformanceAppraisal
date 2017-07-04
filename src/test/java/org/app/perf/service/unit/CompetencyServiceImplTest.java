@@ -160,6 +160,30 @@ public class CompetencyServiceImplTest extends AbstractWebTests {
         verifyNoMoreInteractions(modelMapperMock);
     }
 
+    @Test
+    public void test_competency_should_exist() {
+
+        CompetencyDTO competencyDTO = TestDataGenerator.createNewCompetencyDTO();
+        Competency competency =  createCompetencyObj();
+        when(compentencyRepositoryMock.findByTitle(anyString())).thenReturn(competency);
+
+        boolean exists = competencyService.exists(competencyDTO);
+
+        Assert.assertTrue(exists);
+    }
+
+    @Test
+    public void test_competency_should_not_exist() {
+
+        CompetencyDTO competencyDTO = TestDataGenerator.createNewCompetencyDTO();
+
+        when(compentencyRepositoryMock.findByTitle(anyString())).thenReturn(null);
+
+        boolean exists = competencyService.exists(competencyDTO);
+
+        Assert.assertFalse(exists);
+    }
+
     private Competency createCompetencyObj() {
 
         Competency competency =  new Competency();

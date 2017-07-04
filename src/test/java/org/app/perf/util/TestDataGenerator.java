@@ -29,4 +29,14 @@ public class TestDataGenerator {
         return CompetencyTypeDTO.builder().title(title).build();
     }
 
+    public static CompetencyDTO createNewCompetencyDTO(Long id, String title) {
+        return CompetencyDTO.builder().id(id).title(title).description("Desc")
+                .compentencyLevel(CompentencyLevel.ADVANCED).build();
+    }
+
+    public static CompetencyTypeDTO createNewCompetencyTypeDTO(Long id, String title) {
+        return CompetencyTypeDTO.builder().id(id).title(title).build();
+    }
+
+
 }

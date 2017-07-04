@@ -17,5 +17,7 @@ public interface CompetencyService {
 
     public CompetencyDTO findById(Long id) throws DataNotFoundException;
 
-    List<CompetencyDTO> findAll() throws DataNotFoundException;
+    public List<CompetencyDTO> findAll() throws DataNotFoundException;
+
+    public boolean exists(CompetencyDTO competencyDTO);
 }

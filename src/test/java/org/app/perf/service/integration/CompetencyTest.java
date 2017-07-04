@@ -61,8 +61,8 @@ public class CompetencyTest extends AbstractTests {
     //Find competencytype by id
     @Test
     public void test_find_by_id_should_return_competency() throws DataNotFoundException {
-        CompetencyDTO competencyDTO = TestDataGenerator.createNewCompetencyDTO("C2");
-        competencyDTO.setCompetencyType(createNewCompetencyTypeDTO("CT3"));
+        CompetencyDTO competencyDTO = TestDataGenerator.createNewCompetencyDTO("C21");
+        competencyDTO.setCompetencyType(createNewCompetencyTypeDTO("CT31"));
 
         // Save competency and then find
         compentencyService.save(competencyDTO);
@@ -81,12 +81,12 @@ public class CompetencyTest extends AbstractTests {
     //Save CompetencyType - success
     @Test
     public void test_update_competencytype_should_update() {
-        CompetencyDTO competencyDTO = TestDataGenerator.createNewCompetencyDTO("test");
-        competencyDTO.setCompetencyType(createNewCompetencyTypeDTO());
+        CompetencyDTO competencyDTO = TestDataGenerator.createNewCompetencyDTO("test1");
+        competencyDTO.setCompetencyType(createNewCompetencyTypeDTO("ASDF"));
 
         compentencyService.save(competencyDTO);
 
-        Assert.assertTrue(competencyDTO.getTitle().equals("test"));
+        Assert.assertTrue(competencyDTO.getTitle().equals("test1"));
 
         competencyDTO.setTitle("Updated-Title");
 
@@ -120,11 +120,11 @@ public class CompetencyTest extends AbstractTests {
     //Test find all competencies
     @Test
     public void test_find_all_competencies_should_return_all_competencies() throws DataNotFoundException {
-        CompetencyDTO c1 = TestDataGenerator.createNewCompetencyDTO("C1");
-        c1.setCompetencyType(createNewCompetencyTypeDTO("CT1"));
+        CompetencyDTO c1 = TestDataGenerator.createNewCompetencyDTO("C19");
+        c1.setCompetencyType(createNewCompetencyTypeDTO("CT16"));
 
-        CompetencyDTO c2 = TestDataGenerator.createNewCompetencyDTO("C2");
-        c2.setCompetencyType(createNewCompetencyTypeDTO("CT2"));
+        CompetencyDTO c2 = TestDataGenerator.createNewCompetencyDTO("C27");
+        c2.setCompetencyType(createNewCompetencyTypeDTO("CT27"));
 
         compentencyService.save(c1);
         compentencyService.save(c2);

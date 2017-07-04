@@ -39,7 +39,6 @@ public class CompetencyServiceImpl implements CompetencyService {
 
         Competency competency = modelMapper.map(competencyDTO,Competency.class);
         compentencyRepository.delete(competency);
-        System.out.print(competency);
     }
 
     @Override
@@ -71,6 +70,16 @@ public class CompetencyServiceImpl implements CompetencyService {
         }
 
         return competencyDTOList;
+    }
+
+    @Override
+    public boolean exists(CompetencyDTO competencyDTO) {
+
+        if (compentencyRepository.findByTitle(competencyDTO.getTitle()) == null) {
+            return false;
+        }
+
+        return true;
     }
 
 
