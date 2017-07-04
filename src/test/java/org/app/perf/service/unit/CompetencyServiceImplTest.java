@@ -11,6 +11,7 @@ import org.app.perf.exception.DataNotFoundException;
 import org.app.perf.repository.CompentencyRepository;
 import org.app.perf.service.CompetencyService;
 import org.app.perf.service.CompetencyServiceImpl;
+import org.app.perf.util.TestDataGenerator;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
@@ -40,7 +41,7 @@ import static org.mockito.Mockito.*;
 
 public class CompetencyServiceImplTest extends AbstractWebTests {
 
-    @MockBean
+    @InjectMocks
     private CompetencyServiceImpl competencyService;
 
     @Mock
@@ -49,138 +50,123 @@ public class CompetencyServiceImplTest extends AbstractWebTests {
     @Mock
     private CompentencyRepository compentencyRepositoryMock;
 
-
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
     }
 
+    @Test
+    public void test_find_competency_by_id_should_return_one_competency() throws DataNotFoundException {
 
-//    @Test
-//    public void testFindCompetencyByIdShouldReturnCompetencyDTO() throws DataNotFoundException {
-//
-//        Competency competency =  createCompetencyObj();
-//
-////        CompetencyDTO competencyDTO ;//= new CompetencyDTO();
-////        competencyDTO.setTitle("C1");
-////        competencyDTO.setId(1);
-//
-//        when(compentencyRepositoryMock.findOne(anyLong())).thenReturn(competency);
-//        //when(modelMapperMock.map(any(), any())).thenReturn(competencyDTO);
-//
-//        CompetencyDTO c = competencyService.findById(1L);
-//        verify(compentencyRepositoryMock,times(1)).findOne(anyLong());
-//        verify(modelMapperMock,times(1)).map(any(),any());
-//    }
-//
-//
-//    @Test
-//    public void testFindCompetencyByInvalidIdShouldThrowException() throws DataNotFoundException {
-//
-//        when(compentencyRepositoryMock.findOne(anyLong())).thenThrow(DataNotFoundException.class);
-//
-//        CompetencyDTO c = competencyService.findById(1L);
-//
-//        verify(compentencyRepositoryMock,times(1)).findOne(anyLong());
-//        verify(modelMapperMock,times(0)).map(any(), any());        //verify(competencyService.findById(-1L))
-//    }
-//
-//
-//    @Test
-//    public void testFindAllCompetenciesShouldReturnCompetencies() {
-//
-//        List<Competency> competencies = new ArrayList<Competency>();
-//        competencies.add(createNewCompetencyObj());
-//        competencies.add(createNewCompetencyObj());
-//
-//        CompetencyDTO competencyDTO = new CompetencyDTO();
-//
-//        when(compentencyRepositoryMock.findAll()).thenReturn(competencies);
-////        when(modelMapperMock.map(any(Competency.class),any(CompetencyDTO.class))
-//        when(modelMapperMock.map(any(),any())).thenCallRealMethod();
-//
-//
-////        verify(modelMapperMock,times(2)).map();
-//
-//        List<CompetencyDTO> competencyList = competencyService.findAll();
-//
-//        //Assert.assertEquals();
-//
-//    }
-//
-//    @Test
-//    public void testSaveCompentencyShouldSaveCompetency() {
-//
-//        Competency competency = createCompetencyObj();
-//
-//        CompetencyDTO competencyDTO = new CompetencyDTO();
-//        competencyDTO.setTitle("C1");
-//
-//        doNothing().when(compentencyRepositoryMock).save(competency);
-//        doNothing().when(modelMapperMock).map(any(),any());
-//
-//        competencyService.save(competencyDTO);
-//
-//        verify(compentencyRepositoryMock,times(1)).save(competency);
-//        verify(modelMapperMock,times(1)).map(any(),any());
-//    }
-//
-//
-//    private Competency createNewCompetencyObj() {
-//
-//        Competency competency =  new Competency();
-//        competency.setId(1);
-//        competency.setTitle("C1");
-//        competency.setCompentencyLevel(CompentencyLevel.ADVANCED);
-//        competency.setDescription("Desc");
-//        competency.setCompetencyType(createCompetencyType());
-//
-//        return competency;
-//    }
-//
-//    private Competency createCompetencyObj() {
-//
-//        Competency competency =  new Competency();
-//        competency.setId(1);
-//        competency.setTitle("C1");
-//        competency.setCompentencyLevel(CompentencyLevel.ADVANCED);
-//        competency.setDescription("Desc");
-//        competency.setCompetencyType(createCompetencyType());
-//        competency.setDesignations(null);
-//
-//        return competency;
-//    }
-//
-//    private CompetencyType createCompetencyType() {
-//
-//        CompetencyType competencyType = new CompetencyType();
-//        competencyType.setTitle("title");
-//        competencyType.setId(1);
-//
-//        return competencyType;
-//    }
-//
-//    private Designation createDesignation() {
-//
-//        Set<Responsibility> responsibilities = new HashSet<Responsibility>();
-//        responsibilities.add(createResponsibility());
-//
-//        Designation designation = new Designation();
-//        designation.setTitle("Desig");
-//        designation.setResponsibilities(responsibilities);
-//        designation.setCompetencies(null);
-//
-//        return designation;
-//    }
-//
-//    private Responsibility createResponsibility() {
-//        Responsibility responsibility = new Responsibility();
-//        responsibility.setTitle("Resp");
-//        responsibility.setDescription("Desc");
-//        responsibility.setDesignations(null);
-//        return responsibility;
-//    }
+        Competency competency =  createCompetencyObj();
+        CompetencyDTO competencyDTO = TestDataGenerator.createNewCompetencyDTO();
+
+        when(compentencyRepositoryMock.findOne(anyLong())).thenReturn(competency);
+        when(modelMapperMock.map(any(),any())).thenReturn(competencyDTO);
+
+        CompetencyDTO dto = competencyService.findById(1L);
+
+        verify(compentencyRepositoryMock,times(1)).findOne(anyLong());
+        verify(modelMapperMock,times(1)).map(any(),any());
+
+        verifyNoMoreInteractions(modelMapperMock);
+        verifyNoMoreInteractions(compentencyRepositoryMock);
+    }
+
+    @Test (expected = DataNotFoundException.class)
+    public void test_find_competency_by_invalid_id_should_throw_exception() throws DataNotFoundException {
+
+        when(compentencyRepositoryMock.findOne(anyLong())).thenThrow(DataNotFoundException.class);
+
+        CompetencyDTO dto = competencyService.findById(-1L);
+
+        verify(compentencyRepositoryMock,times(1)).findOne(anyLong());
+        verify(modelMapperMock,times(0)).map(any(),any());
+    }
 
 
+    @Test
+    public void test_find_all_should_return_competencies() throws DataNotFoundException{
+
+        List<CompetencyDTO> competencyDTOList = new ArrayList<CompetencyDTO>();
+        competencyDTOList.add(TestDataGenerator.createNewCompetencyDTO("C1"));
+        competencyDTOList.add(TestDataGenerator.createNewCompetencyDTO("C2"));
+
+        List<Competency> competencyList = new ArrayList<Competency>();
+        competencyList.add(createCompetencyObj());
+        competencyList.add(createCompetencyObj());
+
+        when(compentencyRepositoryMock.findAll()).thenReturn(competencyList);
+
+        List<CompetencyDTO> list = competencyService.findAll();
+
+        Assert.assertEquals(list.size(), 2);
+
+        verify(compentencyRepositoryMock,times(1)).findAll();
+        verifyNoMoreInteractions(compentencyRepositoryMock);
+
+        verify(modelMapperMock,times(2)).map(any(),any());
+        verifyNoMoreInteractions(modelMapperMock);
+    }
+
+
+    @Test (expected = DataNotFoundException.class)
+    public void test_find_all_no_data_returned_should_throw_exception() throws DataNotFoundException{
+
+        when(compentencyRepositoryMock.findAll()).thenThrow(DataNotFoundException.class);
+
+        List<CompetencyDTO> list = competencyService.findAll();
+
+        verify(compentencyRepositoryMock,times(1)).findAll();
+        verifyNoMoreInteractions(compentencyRepositoryMock);
+
+        verify(modelMapperMock,times(0)).map(any(),any());
+    }
+
+    @Test
+    public void test_save_competency() {
+
+        CompetencyDTO competencyDTO = TestDataGenerator.createNewCompetencyDTO();
+        Competency competency =  createCompetencyObj();
+
+        when(modelMapperMock.map(any(),any())).thenReturn(competency);
+        when(compentencyRepositoryMock.save(competency)).thenReturn(competency);
+
+        competencyService.save(competencyDTO);
+
+        verify(modelMapperMock,times(1)).map(any(),any());
+        verifyNoMoreInteractions(modelMapperMock);
+
+        verify(compentencyRepositoryMock,times(1)).save(competency);
+        verifyNoMoreInteractions(compentencyRepositoryMock);
+    }
+
+
+    @Test
+    public void test_remove_competency_should_remove() {
+
+        CompetencyDTO competencyDTO = TestDataGenerator.createNewCompetencyDTO();
+        Competency competency =  createCompetencyObj();
+
+        doNothing().when(compentencyRepositoryMock).delete(competency);
+        when(modelMapperMock.map(any(),any())).thenReturn(competency);
+
+        competencyService.remove(competencyDTO);
+
+        verify(compentencyRepositoryMock,times(1)).delete(competency);
+        verifyNoMoreInteractions(compentencyRepositoryMock);
+
+        verify(modelMapperMock,times(1)).map(competencyDTO,Competency.class);
+        verifyNoMoreInteractions(modelMapperMock);
+    }
+
+    private Competency createCompetencyObj() {
+
+        Competency competency =  new Competency();
+        competency.setId(1);
+        competency.setTitle("C1");
+
+        return competency;
+    }
 
 }

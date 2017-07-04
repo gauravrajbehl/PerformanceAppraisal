@@ -7,10 +7,7 @@ import org.app.perf.dto.CompetencyDTO;
 import org.app.perf.dto.CompetencyTypeDTO;
 import org.app.perf.exception.DataNotFoundException;
 import org.app.perf.service.CompetencyService;
-import org.app.perf.service.CompetencyServiceImpl;
 import org.app.perf.service.CompetencyTypeService;
-import org.app.perf.service.CompetencyTypeServiceImpl;
-import org.app.perf.util.StringUtil;
 import org.app.perf.util.TestDataGenerator;
 import org.junit.Assert;
 import org.junit.Test;
@@ -43,6 +40,7 @@ public class CompetencyTest extends AbstractTests {
         Assert.assertTrue(competencyDTO.getId() != 0);
         Assert.assertNotNull(competencyDTO.getId());
     }
+
 
     //Save duplicate CompetencyType - fail - throw exception
     @Test (expected = DataIntegrityViolationException.class)
@@ -97,7 +95,6 @@ public class CompetencyTest extends AbstractTests {
     }
 
 
-
     // Create, find, remove, find
     @Test(expected = DataNotFoundException.class)
     public void remove_competency_should_get_removed() throws DataNotFoundException{
@@ -118,6 +115,7 @@ public class CompetencyTest extends AbstractTests {
         //Throw Exception
         CompetencyDTO d = compentencyService.findById(competencyDTO.getId());
     }
+
 
     //Test find all competencies
     @Test
