@@ -55,5 +55,15 @@ public class CompetencyController {
         return new ResponseEntity<CompetencyDTO>(competencyDTO, HttpStatus.CREATED);
     }
 
+    @RequestMapping(value = "/competency/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<CompetencyDTO> update(@PathVariable Long id, @RequestBody CompetencyDTO competencyDTO) throws DataNotFoundException{
+
+        CompetencyDTO comp = competencyService.findById(id);
+
+        competencyService.save(competencyDTO);
+
+        return new ResponseEntity<CompetencyDTO>(competencyDTO, HttpStatus.OK);
+    }
+
 
 }

@@ -25,6 +25,7 @@ import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -47,7 +48,7 @@ public class CompetencyControllerTest extends AbstractWebTests {
             MediaType.APPLICATION_JSON.getSubtype(), Charset.forName("utf8"));
 
     @Test
-    public void test_find_by_id_should_return_competencyDTO_json() throws Exception {
+    public void test_find_by_id_should_return_competency_json() throws Exception {
 
         CompetencyDTO competencyDTO = TestDataGenerator.createNewCompetencyDTO(1L, "C01");
         CompetencyTypeDTO competencyTypeDTO = TestDataGenerator.createNewCompetencyTypeDTO(1L,"CT01");
@@ -68,7 +69,7 @@ public class CompetencyControllerTest extends AbstractWebTests {
     }
 
     @Test
-    public void test_find_by_invalid_id_should_return_NO_CONTENT() throws Exception {
+    public void test_find_by_invalid_id_should_return_no_content() throws Exception {
 
         when(competencyServiceMock.findById(anyLong())).thenThrow(DataNotFoundException.class);
 
@@ -105,7 +106,7 @@ public class CompetencyControllerTest extends AbstractWebTests {
     }
 
     @Test
-    public void test_find_all_should_return_NO_CONTENT() throws Exception {
+    public void test_find_all_should_return_no_content() throws Exception {
 
         when(competencyServiceMock.findAll()).thenThrow(DataNotFoundException.class);
 
@@ -115,7 +116,6 @@ public class CompetencyControllerTest extends AbstractWebTests {
         verifyNoMoreInteractions(competencyServiceMock);
 
     }
-
 
     @Test
     public void test_save_should_return_created_status() throws Exception {
@@ -134,7 +134,43 @@ public class CompetencyControllerTest extends AbstractWebTests {
         verify(competencyServiceMock,times(1)).exists(competencyDTO);
         verify(competencyServiceMock,times(1)).save(competencyDTO);
         verifyNoMoreInteractions(competencyServiceMock);
+    }
 
+    @Test
+    public void test_save_should_return_conflict_status() throws Exception {
+
+        CompetencyDTO competencyDTO = TestDataGenerator.createNewCompetencyDTO();
+        CompetencyTypeDTO competencyTypeDTO = TestDataGenerator.createNewCompetencyTypeDTO();
+        competencyDTO.setCompetencyType(competencyTypeDTO);
+
+        when(competencyServiceMock.exists(any())).thenReturn(true);
+
+        mockMvc.perform(post("/competency").contentType(APPLICATION_JSON)
+                .content(new ObjectMapper().writeValueAsString(competencyDTO))).andExpect(status().isConflict());
+
+
+        verify(competencyServiceMock,times(1)).exists(competencyDTO);
+        verify(competencyServiceMock,times(0)).save(competencyDTO);
+        verifyNoMoreInteractions(competencyServiceMock);
+    }
+
+    @Test
+    public void test_update_should_return_status_ok() throws Exception {
+
+        CompetencyDTO competencyDTO = TestDataGenerator.createNewCompetencyDTO(1L,"test");
+        CompetencyTypeDTO competencyTypeDTO = TestDataGenerator.createNewCompetencyTypeDTO();
+        competencyDTO.setCompetencyType(competencyTypeDTO);
+
+        when(competencyServiceMock.findById(anyLong())).thenReturn(competencyDTO);
+
+        mockMvc.perform(put("/competency/1").contentType(APPLICATION_JSON)
+                .content(new ObjectMapper().writeValueAsString(competencyDTO)))
+                .andExpect(status().isOk());
+
+
+        verify(competencyServiceMock,times(1)).findById(1L);
+        verify(competencyServiceMock,times(1)).save(competencyDTO);
+        verifyNoMoreInteractions(competencyServiceMock);
     }
 
 }
